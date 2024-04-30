@@ -30,4 +30,6 @@ app.listen(config.port, function(req, res) {
 			'  监听端口:' +
 			config.port,
 	)
+	const start = (process.platform == 'darwin'? 'open': process.platform == 'win32'? 'start': 'xdg-open');
+	require('child_process').exec(`${start} http://localhost:${config.port}/`)
 })
