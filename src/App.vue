@@ -1,11 +1,13 @@
 <template>
   <div id="app" class="APP">
-    <div class="got-value" @click="clickOnGotValue">ON OK Value: {{ gotValue }}</div>
+    <div class="got-value">ON OK Value: {{ gotValue }}</div>
+    <Button @click="open = true" type="primary">Open Date Picker</Button>
     <DatePicker
       v-model="datetime"
       type="datetime"
       format="yyyy-MM-dd HH:mm"
-      :open="true"
+      v-show="open"
+      :open="open"
       style="width: 200px"
       :clearable="false"
       @on-clear="
@@ -24,6 +26,7 @@ export default {
 
   data() {
     return {
+      open: false,
       datetime: new Date(),
       gotValue: ""
     };
@@ -32,9 +35,7 @@ export default {
   methods: {
     onOK() {
       this.gotValue = this.datetime.toString();
-    },
-    clickOnGotValue() {
-      this.gotValue = this.datetime.toString();
+      this.open = false;
     }
   }
 };
@@ -50,7 +51,6 @@ export default {
 
   .got-value {
     font-size: 20px;
-    cursor: pointer;
   }
 }
 </style>
